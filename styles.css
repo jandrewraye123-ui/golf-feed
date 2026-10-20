@@ -1,0 +1,156 @@
+/* The Clubhouse Creators: shared styles
+   Concept: a hand-operated tournament leaderboard. White board panels,
+   green and red numbers, condensed sign-painter type. */
+
+:root {
+  --board: #fbfbf8;
+  --surface: #ffffff;
+  --ink: #18201b;
+  --muted: #5d6862;
+  --green: #0b5d3b;
+  --green-soft: #e3eee7;
+  --red: #b8232b;
+  --line: #d4dbd6;
+  --notice-bg: #18201b;
+  --notice-ink: #f3f5f2;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --board: #121814;
+    --surface: #1a221d;
+    --ink: #e9eeea;
+    --muted: #a3afa8;
+    --green: #5fbf8f;
+    --green-soft: #1f3a2c;
+    --red: #ef6b6f;
+    --line: #2d3832;
+    --notice-bg: #e9eeea;
+    --notice-ink: #121814;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--board);
+  color: var(--ink);
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--green); text-underline-offset: 3px; }
+a:hover { color: var(--red); }
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 2px;
+}
+
+h1, h2, h3, .brand, .nav a, .board-row, .tag {
+  font-family: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+}
+
+h1 { font-size: clamp(2.4rem, 7vw, 4.2rem); line-height: 1.02; font-weight: 700; margin: 0 0 1rem; }
+h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); line-height: 1.1; font-weight: 700; margin: 2.75rem 0 0.75rem; }
+h3 { font-size: 1.45rem; line-height: 1.15; font-weight: 600; margin: 0 0 0.4rem; }
+p { margin: 0 0 1rem; }
+
+.wrap { width: min(100% - 2.5rem, 68rem); margin-inline: auto; }
+.prose { max-width: 40rem; }
+
+/* Required class notice */
+.notice {
+  background: var(--notice-bg);
+  color: var(--notice-ink);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  padding: 0.6rem 1.25rem;
+  margin: 0;
+  text-align: center;
+}
+
+/* Header */
+.site-header { border-bottom: 3px solid var(--green); background: var(--surface); }
+.site-header .wrap {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 0.75rem 1.5rem; padding-block: 0.9rem;
+}
+.brand {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-size: 1.6rem; font-weight: 700; color: var(--ink); text-decoration: none;
+}
+.brand img { width: 40px; height: 40px; }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+.nav a { font-size: 1.15rem; font-weight: 600; color: var(--ink); text-decoration: none; padding: 0.2rem 0; border-bottom: 3px solid transparent; }
+.nav a:hover { color: var(--green); }
+.nav a[aria-current="page"] { border-bottom-color: var(--red); }
+
+/* Page intro */
+.intro { padding: 3rem 0 1rem; display: grid; gap: 2rem; align-items: center; }
+@media (min-width: 52rem) { .intro { grid-template-columns: 1.4fr 1fr; } }
+.lede { font-size: 1.2rem; color: var(--muted); max-width: 36rem; }
+
+/* The leaderboard: the one bold element */
+.board {
+  background: var(--surface);
+  border: 3px solid var(--green);
+  margin: 1.5rem 0 0.5rem;
+  overflow-x: auto;
+}
+.board-head, .board-row {
+  display: grid;
+  grid-template-columns: 3rem 1fr 7rem;
+  align-items: center;
+  min-width: 20rem;
+}
+.board-head {
+  background: var(--green); color: #fff;
+  font-family: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  font-weight: 600; font-size: 1.05rem; padding: 0.45rem 0.75rem;
+}
+.board-row { border-top: 1px solid var(--line); padding: 0.55rem 0.75rem; font-size: 1.35rem; font-weight: 600; }
+.board-row .pos { color: var(--muted); }
+.board-row .num { text-align: right; color: var(--red); font-variant-numeric: tabular-nums; }
+.board-row .num.up { color: var(--green); }
+.source { font-size: 0.9rem; color: var(--muted); }
+
+/* Section links on home */
+.sections { display: grid; gap: 1.25rem; margin-top: 1.5rem; }
+@media (min-width: 48rem) { .sections { grid-template-columns: repeat(3, 1fr); } }
+.section-link {
+  display: block; padding: 1.25rem; background: var(--surface);
+  border-left: 5px solid var(--green); color: var(--ink); text-decoration: none;
+}
+.section-link:hover { border-left-color: var(--red); color: var(--ink); }
+.section-link p { color: var(--muted); margin: 0; }
+
+/* Creator profiles */
+.profiles { display: grid; gap: 0; margin-top: 1rem; border-top: 3px solid var(--green); }
+.profile { padding: 1.4rem 0; border-bottom: 1px solid var(--line); display: grid; gap: 0.3rem 2rem; }
+@media (min-width: 48rem) { .profile { grid-template-columns: 15rem 1fr; } }
+.profile .meta { color: var(--muted); font-size: 0.95rem; }
+.tag {
+  display: inline-block; font-size: 0.95rem; font-weight: 600;
+  background: var(--green-soft); color: var(--green); padding: 0.05rem 0.5rem; margin-top: 0.3rem;
+}
+
+.callout { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--red); padding: 1.25rem; margin: 1.5rem 0; max-width: 44rem; }
+.callout p:last-child { margin-bottom: 0; }
+
+main { padding-bottom: 3rem; }
+
+/* Footer */
+.site-footer { border-top: 3px solid var(--green); background: var(--surface); margin-top: 2rem; }
+.site-footer .wrap { padding-block: 1.5rem; display: grid; gap: 1rem; }
+.site-footer .nav a { font-size: 1.05rem; }
+.site-footer .notice { border-radius: 0; }
+.small { font-size: 0.9rem; color: var(--muted); }
